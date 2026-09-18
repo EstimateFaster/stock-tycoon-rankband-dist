@@ -1,22 +1,23 @@
 {
   "schema": 1,
-  "versionCode": 9,
-  "versionName": "1.7.0",
+  "versionCode": 10,
+  "versionName": "1.7.1",
   "minSupportedVersionCode": 7,
-  "apkUrl": "https://github.com/EstimateFaster/stock-tycoon-rankband-dist/releases/download/v1.7.0/rankband-1.7.0.apk",
-  "sha256": "b2e38e5a05ef3575a942667986951c60d31de7060e9c93f64550bf3ea9b8a755",
-  "sizeBytes": 6612764,
-  "publishedAt": "2026-09-18T15:14:52.420Z",
+  "apkUrl": "https://github.com/EstimateFaster/stock-tycoon-rankband-dist/releases/download/v1.7.1/rankband-1.7.1.apk",
+  "sha256": "8b8fc56c1998a11dbb9debb95f6318a5fb9581602c5870a7a94a58e194c3d8de",
+  "sizeBytes": 6616288,
+  "publishedAt": "2026-09-18T16:05:36.455Z",
   "changelog": [
+    "手环连接重新实现：补上协议规定的握手，手机点【连接手环】不再互相干等",
     "连接四项检测不再假通过：没查过显示「未检查」，查不出结论显示「未能确认」",
     "修复按钮与等待页里的圆环进度条不转（现在真的会转）",
     "连接详情改为独立页面：不再从连接页一点就跳进带底部导航的主界面",
+    "修复「手环没发成绩、榜单却来了」：成绩没到就一份榜单都不下发",
+    "修复手点【同步】时把已确认过的成绩误报成「手机还没确认」",
     "检查更新与更新提示改为弹窗，进度与失败原因都在同一个框里说清楚",
-    "强制更新仍是关不掉的弹窗：返回键与点遮罩都无效，也没有「稍后」",
-    "首页右上角新增消息入口（带未读角标）",
-    "首页新增「重要活动」卡片（最多两张），点开可看全文",
-    "消息列表里每张卡片都能点开，弹窗显示全文（长文可滚动）",
+    "首页右上角新增消息入口（带未读角标）；消息卡片可点开看全文",
+    "首页新增「重要活动」卡片（最多两张）",
     "手机应用名改为「股市大亨同步器」",
-    "手环端玩法不变，本次只更新手机端"
+    "⚠️ 手环端 RPK 也要更新到 1.7.0（这一代才开始发握手）"
   ]
 }
