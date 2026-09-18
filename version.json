@@ -1,20 +1,22 @@
 {
   "schema": 1,
-  "versionCode": 8,
-  "versionName": "1.6.0",
+  "versionCode": 9,
+  "versionName": "1.7.0",
   "minSupportedVersionCode": 7,
-  "apkUrl": "https://github.com/EstimateFaster/stock-tycoon-rankband-dist/releases/download/v1.6.0/rankband-1.6.0.apk",
-  "sha256": "e70bb4c00e402bad3fdc035d26bc0d64554686af8a52a7af84d321d456f1a250",
-  "sizeBytes": 6588052,
-  "publishedAt": "2026-09-18T14:24:01.269Z",
+  "apkUrl": "https://github.com/EstimateFaster/stock-tycoon-rankband-dist/releases/download/v1.7.0/rankband-1.7.0.apk",
+  "sha256": "b2e38e5a05ef3575a942667986951c60d31de7060e9c93f64550bf3ea9b8a755",
+  "sizeBytes": 6612764,
+  "publishedAt": "2026-09-18T15:14:52.420Z",
   "changelog": [
-    "手机应用支持自动检查更新，并可直接下载安装",
-    "版本过旧时会提示更新（更新完成前无法继续使用）",
-    "新增「消息与活动」：游戏活动与版本公告推送",
-    "消息支持离线查看，右上角可手动刷新",
-    "修复启动即闪退（初始化顺序问题）",
-    "新增应用图标（排行榜主题）",
-    "取消全部自动请求：不再轮询、不再自动重试",
-    "手机没收到成绩就不下发，不会出现空榜单"
+    "连接四项检测不再假通过：没查过显示「未检查」，查不出结论显示「未能确认」",
+    "修复按钮与等待页里的圆环进度条不转（现在真的会转）",
+    "连接详情改为独立页面：不再从连接页一点就跳进带底部导航的主界面",
+    "检查更新与更新提示改为弹窗，进度与失败原因都在同一个框里说清楚",
+    "强制更新仍是关不掉的弹窗：返回键与点遮罩都无效，也没有「稍后」",
+    "首页右上角新增消息入口（带未读角标）",
+    "首页新增「重要活动」卡片（最多两张），点开可看全文",
+    "消息列表里每张卡片都能点开，弹窗显示全文（长文可滚动）",
+    "手机应用名改为「股市大亨同步器」",
+    "手环端玩法不变，本次只更新手机端"
   ]
 }
