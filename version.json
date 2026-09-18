@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "versionCode": 8,
+  "versionName": "1.6.0",
+  "minSupportedVersionCode": 7,
+  "apkUrl": "https://github.com/EstimateFaster/stock-tycoon-rankband-dist/releases/download/v1.6.0/rankband-1.6.0.apk",
+  "sha256": "e70bb4c00e402bad3fdc035d26bc0d64554686af8a52a7af84d321d456f1a250",
+  "sizeBytes": 6588052,
+  "publishedAt": "2026-09-18T14:24:01.269Z",
+  "changelog": [
+    "手机应用支持自动检查更新，并可直接下载安装",
+    "版本过旧时会提示更新（更新完成前无法继续使用）",
+    "新增「消息与活动」：游戏活动与版本公告推送",
+    "消息支持离线查看，右上角可手动刷新",
+    "修复启动即闪退（初始化顺序问题）",
+    "新增应用图标（排行榜主题）",
+    "取消全部自动请求：不再轮询、不再自动重试",
+    "手机没收到成绩就不下发，不会出现空榜单"
+  ]
+}
