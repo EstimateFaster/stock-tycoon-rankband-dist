@@ -1,17 +1,21 @@
 {
   "schema": 1,
-  "versionCode": 13,
-  "versionName": "1.7.4",
+  "versionCode": 14,
+  "versionName": "1.7.5",
   "minSupportedVersionCode": 7,
-  "apkUrl": "https://github.com/EstimateFaster/stock-tycoon-rankband-dist/releases/download/v1.7.4/rankband-1.7.4.apk",
-  "sha256": "8ba6ddd0bd441bf6e510e7d9841b0c4a8b63d30e93b17e0a8a5d1d2b5f535ce9",
-  "sizeBytes": 6644100,
-  "publishedAt": "2026-09-19T05:13:11.703Z",
+  "apkUrl": "https://github.com/EstimateFaster/stock-tycoon-rankband-dist/releases/download/v1.7.5/rankband-1.7.5.apk",
+  "sha256": "8bde6a8204a98ca332d2b19b63c5dae3c044a2094a4dc56bb84881bd99acd644",
+  "sizeBytes": 6644108,
+  "publishedAt": "2026-09-19T06:41:25.296Z",
   "changelog": [
-    "修复真机上\"能收发消息却对不上话\"的问题（手机说\"没收到成绩\"，手环上写「读取中」）：",
-    "手环冷启动也能读到成绩：手环息屏会杀进程，手机把【同步成绩】页推到前台那一刻进程是刚起来的、存档还没载入 —— 以前三行全显示「读取中」。现在启动时自动读回当前存档，同步页也会自己兜底载入一次，并如实写明「尚无存档 / 正在载入 / 设备码不可用」。",
-    "手环发不出去就把原因回执给手机（新增 sync_status）：手机连接页直接显示「手环暂时无法发送成绩：存档尚未载入…」，不再只提示「请在手环上点【同步】」；收到原因后手机也不再白等剩下的两轮。",
-    "设备码读取失败不再无声无息：以前是静默返回，界面永远停在「读取中」。现在日志与【连接诊断】页会给出平台错误码与原文。",
-    "【连接诊断】不再自相矛盾：「手机握手已应答」（hello_ack）与「手机成绩回执」（rank_ack）分成两件事显示；平台没有提供 getReadyState 时写明「就绪查询=平台未提供（不影响发送）」——它只是查不到，不是通道不通，也不影响发送。"
+    "真机现场（2026-09-19 三张照片）指向一个自相矛盾的状态：**通道已建立、send 可用，却「收 0 发 0」**，同步页三行全是「—」。逐层排查后确认根因不在 interconnect，而在 RPK 的打包结构。完整排查记录见 docs/13。",
+    "★ 应用级与各页面原本各持一份通道实例（总根因）：AIoT 工具链给 app.js 与每个 pages/*.js 各打一份独立 bundle（optimization 里没有 splitChunks），所以 import rankChannel 在 app 与页面里本来是两个不同的对象。app 侧装好的 meProvider / 设备码 / 握手状态，页面一个都看不见 ——于是「等级/金币/游戏日」全是「—」、「【同步】」永远点不动。现在把实例锚在引擎全局对象上（键 __stocktycoon_rank_channel_v1__），全应用共用同一份，并把锚点写进启动日志与诊断页现场读数。",
+    "启动四步互不牵连：建通道 / 订阅同步请求 / 绑定成绩 / 载入存档 各自 try/catch。以前它们同处一个 try，start() 一抛错后面三步一步都不跑 —— 与上面的症状叠加。",
+    "读不到成绩一定给出可行动原因：补齐「存档缺少 player 字段」这一档（以前会返回空串，界面只能显示笼统的「本机成绩尚未就绪」）。",
+    "连接判据不再只押在 getReadyState 上：这台固件没有该接口，而 onopen在「加入时连接已建好」的情况下不会触发（本项目的真机观察，docs 未记载）——两条路同时断时手环一包都不发。现在：启动后延迟 900ms 复查一次；probe() 读不到 readyState 时改看 getApkStatus（官方 FAQ 要求轮询它），并有界地主动发一次 hello；uninstalled 是确定结论，不白发、界面直说。",
+    "【连接诊断】不再卡住：diagnosis 加了 JS 侧看门狗（timeout + 2000ms）。以前平台不回调时页面 then(refresh) 永远不执行，玩家看到的就是「点了没反应」。现场读数新增「对端应用状态」「通道单例」「最近一次发送失败原因」三项。",
+    "存档载入完成后立即刷新同步页，不用靠来回切页面碰运气。",
+    "cd game && npm test —— 新增 7 条回归（跨 bundle 单例正/反序、启动步骤隔离、getApkStatus 判读、无 getReadyState 也必须发 hello、diagnosis 看门狗、身份只绑一次、读不到成绩必须有非空原因）。",
+    "cd game && npm run verify:singleton —— 产物级验证：把 npm run release 产出的真实 app.js 与三个页面 bundle 装进同一个 JS 上下文求值（含页面的惰性 entry），断言 app 与页面认到的是同一个实例（CI 已在 RPK job 里执行）。"
   ]
 }
